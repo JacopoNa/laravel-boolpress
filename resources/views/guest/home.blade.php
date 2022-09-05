@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>HOME PUBBLICA</h1>
+    <div id="root"></div>
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection
