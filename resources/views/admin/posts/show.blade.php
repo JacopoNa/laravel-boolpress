@@ -11,6 +11,14 @@
         <div>Slug: {{ $post->slug }}</div>
     </div>
 
-    <a class="btn btn-primary" href="{{ route('admin.posts.edit', ['post' => $post->id]) }}">Modifica il post</a>
+    <div>
+        <a class="btn btn-primary" href="{{ route('admin.posts.edit', ['post' => $post->id]) }}">Modifica il post</a>
+    </div>
+
+    <form action="{{ route('admin.posts.destroy', ['post' => $post->id] ) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <input class="btn btn-danger" type="submit" value="Cancella post">
+    </form>
 
 @endsection
