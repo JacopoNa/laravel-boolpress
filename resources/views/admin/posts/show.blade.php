@@ -9,6 +9,7 @@
         <div>Creato il: {{ $post->created_at->format('l d M Y') }}</div>
         <div>Aggiornato il: {{ $post->updated_at->format('l d M Y') }}</div>
         <div>Slug: {{ $post->slug }}</div>
+        <div>categoria: {{ $post->category ? $post->category->name : 'nessuna' }}</div>
     </div>
 
     <div>
