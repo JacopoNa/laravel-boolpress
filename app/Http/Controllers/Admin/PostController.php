@@ -8,6 +8,7 @@ use App\Post;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -34,8 +35,11 @@ class PostController extends Controller
     {
         $new_post = new Post();
         $categories = Category::all();
+        $tags = Tag::all();
+
         $data = [
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ];
         return view('admin.posts.create', $data);
     }
@@ -51,9 +55,15 @@ class PostController extends Controller
         $request->validate($this->validation());
         $form_data = $request->all();
         $new_post = new Post();
+
         $new_post->fill($form_data);
         $new_post->slug = $this->getSlug($new_post->title);
         $new_post->save();
+
+        if (isset($form_data['tags'])) {
+            $new_post->tags()->sync($form_data['tags']);
+        }
+        
         return redirect()->route('admin.posts.show', ['post' => $new_post->id]);
     }
 

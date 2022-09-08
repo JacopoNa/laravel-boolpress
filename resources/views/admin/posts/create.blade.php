@@ -28,13 +28,25 @@
         </div>
 
         <div class="mb-3">
+            <span>Tags</span>
+            @foreach ($tags as $tag)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="tag{{ $tag->id }}" name="tags[]" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="tag{{ $tag->id }}">
+                        {{ $tag->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
         </div>
         
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto</label>
-            <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+            <textarea class="form-control" id="content" name="content" rows="5">{{ old('content') }}</textarea>
         </div>
           
         <input type="submit" class="btn btn-primary" value="Crea">

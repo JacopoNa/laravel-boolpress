@@ -10,6 +10,18 @@
         <div>Aggiornato il: {{ $post->updated_at->format('l d M Y') }}</div>
         <div>Slug: {{ $post->slug }}</div>
         <div>categoria: {{ $post->category ? $post->category->name : 'nessuna' }}</div>
+        
+           <div>
+                Tags:
+                @if ($post->tags->isNotEmpty())
+                    @foreach ($post->tags as $tag)
+                        {{ $tag->name }} {{ !$loop->last ? ',' : ''}}
+                    @endforeach
+                @else
+                    nessuno
+                @endif
+            </div> 
+        
     </div>
 
     <div>
