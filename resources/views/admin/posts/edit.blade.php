@@ -28,6 +28,28 @@
         </div>
 
         <div class="mb-3">
+            <span>Tags</span>
+            @foreach ($tags as $tag)
+                @if ($errors->any())
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="tag{{ $tag->id }}" name="tags[]" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="tag{{ $tag->id }}">
+                            {{ $tag->name }}
+                        </label>
+                    </div>
+                @else
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="tag{{ $tag->id }}" name="tags[]" {{ $post->tags->contains($tag) ? 'checked' : ''}}>
+                        <label class="form-check-label" for="tag{{ $tag->id }}">
+                            {{ $tag->name }}
+                        </label>
+                    </div>
+                @endif
+                
+            @endforeach
+        </div>
+
+        <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $post->title) }}">
         </div>

@@ -92,11 +92,14 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
+        $tags = Tag::all();
 
         $data = [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ];
+      
         return view('admin.posts.edit', $data);
     }
 
@@ -112,10 +115,17 @@ class PostController extends Controller
         $request->validate($this->validation());
         $form_data = $request->all();
         $post_to_update = Post::findOrFail($id);
+
         if ($post_to_update->title != $form_data['title']) {
             $form_data['slug'] = $this->getSlug($form_data['title']);
         } else {
             $form_data['slug'] = $post_to_update->slug;
+        }
+        
+        if (isset($form_data['tags'])) {
+            $post_to_update->tags()->sync($form_data['tags']);
+        } else {
+            $post_to_update->tags()->sync([]);
         }
 
         $post_to_update->update($form_data);
@@ -133,6 +143,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post_to_delete = Post::findOrFail($id);
+        $post_to_delete->tags()->sync([]);
         $post_to_delete->delete();
 
         return redirect()->route('admin.posts.index');
@@ -157,6 +168,8 @@ class PostController extends Controller
         return [
             'title' => 'bail|required|max:255',
             'content' => 'bail|required|max:60000',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ];
     }
 }
