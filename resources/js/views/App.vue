@@ -1,5 +1,17 @@
 <template>
-    <div>
-        <h1>HOME PUBBLICA STAMPATA CON VUE JS</h1>
-    </div>
+    <main>
+        <Posts/>
+    </main>
 </template>
+
+
+<script>
+import Posts from '../components/Posts.vue';
+
+export default {
+    name: 'App',
+    components: {
+        Posts
+    }
+}
+</script>
