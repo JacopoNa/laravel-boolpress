@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import HomePage from './pages/HomePage.vue';
 import About from './pages/About.vue';
 import Blog from './pages/Blog.vue';
+import NotFoundPage from './pages/NotFoundPage.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,6 +26,11 @@ const router = new VueRouter({
             name: 'blog',
             component: Blog 
         },
+        { 
+            path: '/*', 
+            name: 'not-found-page',
+            component: NotFoundPage 
+        }
       ]
   });
 
