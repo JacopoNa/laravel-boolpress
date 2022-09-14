@@ -3,15 +3,8 @@
         <h2>Tutti i post</h2>
 
         <div class="row row-cols-3">
-            <div class="col" v-for="post in posts" :key="post.id">
-                <div class="card mt-3">
-                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ cutText(post.content) }}</p>
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                    </div>
-                </div>
+            <div class="col" v-for="singlePost in posts" :key="singlePost.id">
+                <PostDetails :post ="singlePost"/>
             </div>
         </div>
 
@@ -36,8 +29,13 @@
 </template>
 
 <script>
+import PostDetails from './PostDetails.vue';
+
 export default {
     name: 'Posts',
+    components: {
+        PostDetails
+    },
     data() {
         return {
             posts: [],
@@ -53,13 +51,6 @@ export default {
                 this.currentPage = response.data.results.current_page,
                 this.lastPage = response.data.results.last_page
             })
-        },
-        cutText(text) {
-            if (text.length > 70) {
-                return text.slice(0, 70) + '...';
-            } else {
-                return text;
-            }
         }
     },
     mounted() {
