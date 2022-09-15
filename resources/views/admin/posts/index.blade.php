@@ -7,7 +7,9 @@
         @foreach ($posts as $post)
             <div class="col mt-3">
                 <div class="card">
-                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                    @if ($post->cover)
+                        <img src="{{ asset('storage/' . $post->cover) }}" class="card-img-top" alt="{{ $post->title }}">
+                    @endif
                     <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     {{-- <p class="card-text"></p> --}}

@@ -134,6 +134,11 @@ class PostController extends Controller
             $post_to_update->tags()->sync([]);
         }
 
+        if (isset($form_data['image'])) {
+            $img_path = Storage::put('post_covers', $form_data['image']);
+            $form_data['cover'] = $img_path;
+        }
+
         $post_to_update->update($form_data);
 
         return redirect()->route('admin.posts.show', ['post' => $post_to_update->id]);
@@ -175,7 +180,8 @@ class PostController extends Controller
             'title' => 'bail|required|max:255',
             'content' => 'bail|required|max:60000',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'cover' => 'nullable|max:2048'
         ];
     }
 }
