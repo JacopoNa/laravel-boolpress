@@ -2194,7 +2194,13 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "card mt-3"
-  }, [_c("div", {
+  }, [_vm.post.cover ? _c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: _vm.post.cover,
+      alt: _vm.post.title
+    }
+  }) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
@@ -2445,7 +2451,13 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_vm.post ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]) : _vm._e(), _vm._v(" "), _vm.post.category ? _c("h3", [_vm._v("Categoria: " + _vm._s(_vm.post.category.name))]) : _vm._e(), _vm._v(" "), _vm.post.tags.length > 0 ? _c("div", _vm._l(_vm.post.tags, function (tag, index) {
+  }, [_vm.post ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]) : _vm._e(), _vm._v(" "), _vm.post.cover ? _c("img", {
+    staticClass: "w-50",
+    attrs: {
+      src: _vm.post.cover,
+      alt: _vm.post.title
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.post.category ? _c("h3", [_vm._v("Categoria: " + _vm._s(_vm.post.category.name))]) : _vm._e(), _vm._v(" "), _vm.post.tags.length > 0 ? _c("div", _vm._l(_vm.post.tags, function (tag, index) {
     return _c("h5", {
       key: index
     }, [_vm._v(_vm._s(tag.name))]);
