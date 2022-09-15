@@ -135,6 +135,10 @@ class PostController extends Controller
         }
 
         if (isset($form_data['image'])) {
+            if ($post_to_update->cover) {
+                Storage::delete($post_to_update->cover);
+            }
+
             $img_path = Storage::put('post_covers', $form_data['image']);
             $form_data['cover'] = $img_path;
         }
