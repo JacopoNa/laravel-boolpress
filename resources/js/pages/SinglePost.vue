@@ -24,7 +24,11 @@ export default {
     mounted() {
         axios.get('http://127.0.0.1:8000/api/posts/' + this.$route.params.slug)
         .then((response) => {
-            this.post = response.data.results;
+            if(response.data.success) {
+                this.post = response.data.results;
+            } else {
+                this.$router.push({name: 'not-found-page'});
+            }
         });
     }
 }
