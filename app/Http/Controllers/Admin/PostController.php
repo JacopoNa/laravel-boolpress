@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Category;
 use App\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -55,6 +56,11 @@ class PostController extends Controller
         $request->validate($this->validation());
         $form_data = $request->all();
         $new_post = new Post();
+
+        if (isset($form_data['image'])) {
+            $img_path = Storage::put('post_covers', $form_data['image']);
+            $form_data['cover'] = $img_path;
+        }
 
         $new_post->fill($form_data);
         $new_post->slug = $this->getSlug($new_post->title);

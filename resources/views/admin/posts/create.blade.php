@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.posts.store') }}" method="post">
+    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
 
@@ -37,6 +37,12 @@
                     </label>
                 </div>
             @endforeach
+        </div>
+
+        {{-- INPUT IMMAGINI --}}
+        <div class="mb-3">
+            <label for="image" class="form-label">Immagine</label>
+            <input class="form-control" type="file" id="image" name="image">
         </div>
 
         <div class="mb-3">
